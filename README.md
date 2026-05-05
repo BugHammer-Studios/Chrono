@@ -1,5 +1,5 @@
 # Chrono App
-  App Pomodoro Com Tarefas e mascotes interativos
+  É um app pomodoro que consiste em te deixar focado com bichinhos fofos e interativos
   
 ## Funcionalidades
  - Settar Timer
