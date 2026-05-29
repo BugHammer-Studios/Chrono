@@ -153,12 +153,13 @@ export default function PomodoroTab() {
     savedMs.current = 0;
   };
 
-  // Botões de ajuste (+5, +10)
-  const addMinutes = (mins) => {
-    const msToAdd = mins * 60000;
-    setTotalMs((prev) => prev + msToAdd);
-    setTimeLeft((prev) => prev + msToAdd);
-  };
+  // Botões de ajuste (-10, -5, +5, +10)
+const addMinutes = (mins) => {
+  const msToAdd = mins * 60000;
+
+  setTotalMs((prev) => Math.max(prev + msToAdd, 0));
+  setTimeLeft((prev) => Math.max(prev + msToAdd, 0));
+};
 
   // Adicionar ciclo extra
   const addExtraCycle = () => {
@@ -228,22 +229,39 @@ export default function PomodoroTab() {
       </Box>
 
       {/* Botões de Ajuste Rápido */}
-      <Stack direction="row" spacing={2} sx={{ mb: 2 }}>
-        <Button
-          variant="outlined"
-          onClick={() => addMinutes(5)}
-          sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
-        >
-          +5 min
-        </Button>
-        <Button
-          variant="outlined"
-          onClick={() => addMinutes(10)}
-          sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
-        >
-          +10 min
-        </Button>
-      </Stack>
+<Stack direction="row" spacing={2} sx={{ mb: 2 }}>
+  <Button
+    variant="outlined"
+    onClick={() => addMinutes(-10)}
+    sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
+  >
+    -10 min
+  </Button>
+
+  <Button
+    variant="outlined"
+    onClick={() => addMinutes(-5)}
+    sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
+  >
+    -5 min
+  </Button>
+
+  <Button
+    variant="outlined"
+    onClick={() => addMinutes(5)}
+    sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
+  >
+    +5 min
+  </Button>
+
+  <Button
+    variant="outlined"
+    onClick={() => addMinutes(10)}
+    sx={{ borderRadius: 4, borderColor: 'rgba(255,255,255,0.2)', color: 'white' }}
+  >
+    +10 min
+  </Button>
+</Stack>
         <Typography variant="h6" sx={{ fontWeight: 700 }}>
           Ciclo {currentCycle} / {totalCycles}
       </Typography>
